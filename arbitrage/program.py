@@ -85,4 +85,6 @@ def program():
                     amount,
                     ActiveTrades.tail(1)['amount2'].values[0]
                 ])
+            #TODO add transfer funds ability to the program
+            #app.TransferFunds(amount=amount,types=2)
             app.EmailMe(title="Sold Asset",Msg="Asset Was Sold")

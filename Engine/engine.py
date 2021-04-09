@@ -62,6 +62,8 @@ class Market:
         Comunication between furures and spot markets
     '''
     def TransferFunds(self,amount,types=1):
+        #1 means from spot to futures
+        #2 means from futures to spot
         self.client.futures_account_transfer(asset="USDT",amount=amount,type=types)
 
     '''
