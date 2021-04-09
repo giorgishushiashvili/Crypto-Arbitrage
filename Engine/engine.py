@@ -43,11 +43,27 @@ class Market:
         ]
         return dt
     #Placing Market orders on spot market 
-    def Order(self,ticker,quantity):
-        self.client.order_market_buy(
-            symbol=ticker,
-            quantity=quantity
-        )
+    def Order(self,ticker,quantity,BUY=True):
+        if BUY:
+            self.client.order_market_buy(
+                symbol=ticker,
+                quantity=quantity
+            )
+        else:
+            self.client.order_market_sell(
+                symbol=ticker,
+                quantity=quantity
+            )
+    #get Account Balance for spot market
+    def GetAccountBalance(self,ticker="USDT"):
+        return float(self.client.get_asset_balance(asset=ticker)['free'])
+
+    '''
+        Comunication between furures and spot markets
+    '''
+    def TransferFunds(self,amount,types=1):
+        self.client.futures_account_transfer(asset="USDT",amount=amount,type=types)
+
     '''
         This is functions for Futures crypto market
     '''
@@ -82,8 +98,9 @@ class Market:
             self.client.futures_create_order(symbol=ticker,side=side,type=types,quantity=quantity,price=price,timeInForce="GTC")
         elif types=="MARKET":
             self.client.futures_create_order(symbol=ticker,side=side,type=types,quantity=quantity)
+    
     '''
-        This will be functions for error handling
+        This will be functions for error handling and Alert system
     '''
     #Add Log information
     def additlog (self,file_name, list_of_elem):
@@ -95,7 +112,7 @@ class Market:
             # Add contents of list as last row in the csv file
             csv_writer.writerow(list_of_elem)
     #send an email
-    def SentAlert(self,title="No Title",Msg="This is empty email"):
+    def EmailMe(self,title="No Title",Msg="This is empty email"):
         import smtplib, ssl
         from email.mime.text import MIMEText
         from email.mime.multipart import MIMEMultipart
