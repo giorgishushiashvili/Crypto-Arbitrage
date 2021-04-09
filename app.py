@@ -1,7 +1,4 @@
-import Engine.engine as engine
-import time
-app = engine.Market()
+import arbitrage.program as program
 
-amount = 130
-
-print(app.candles("ETHUSDT"))
+#TODO from here program will begin
+program.program()

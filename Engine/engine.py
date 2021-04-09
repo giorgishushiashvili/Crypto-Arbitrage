@@ -9,15 +9,18 @@ class Market:
     '''
         This is function for the comman crypto market
     '''
+    #get Order book for spot market
     def MarketDepth(self,ticker):
         depth = self.client.get_order_book(symbol=ticker)
         asks = pd.DataFrame(depth['asks'])
         bids = pd.DataFrame(depth['bids'])
         return [asks,bids]
+    #get Market price for spot market
     def MarketPrice(self,ticker):
         data = self.client.get_recent_trades(symbol=ticker)
         return float(data[len(data)-1]['price'])
-    def candles(self,ticker,Duration="1h",ago="3 day"):
+    #Getting history data for spot market
+    def candles(self,ticker,Duration="1h",ago="2 day"):
         ducation = {
             "1m":Client.KLINE_INTERVAL_1MINUTE,
             "1h":Client.KLINE_INTERVAL_1HOUR,
@@ -39,11 +42,17 @@ class Market:
             'Ignore'
         ]
         return dt
-
+    #Placing Market orders on spot market 
+    def Order(self,ticker,quantity):
+        self.client.order_market_buy(
+            symbol=ticker,
+            quantity=quantity
+        )
     '''
         This is functions for Futures crypto market
     '''
-    def Futeres_candles(self,ticker,interval='1h',limit=1500):
+    #get history data for futures market
+    def Futures_candles(self,ticker,interval='1h',limit=1500):
         dt = pd.DataFrame(self.client.futures_klines(symbol=ticker,interval=interval,limit=limit))
         dt.columns = [
             'Open time',
@@ -60,6 +69,19 @@ class Market:
             'Ignore'
         ]
         return dt
+    
+    #get order book for futures market 
+    def futures_MarketDepth(self,ticker):
+        depth = self.client.futures_order_book(symbol=ticker)
+        asks = pd.DataFrame(depth['asks'])
+        bids = pd.DataFrame(depth['bids'])
+        return [asks,bids]
+    #place orders on futures market
+    def futures_order(self,ticker,side,types,quantity,price=0):
+        if types=="LIMIT" and price != 0:
+            self.client.futures_create_order(symbol=ticker,side=side,type=types,quantity=quantity,price=price,timeInForce="GTC")
+        elif types=="MARKET":
+            self.client.futures_create_order(symbol=ticker,side=side,type=types,quantity=quantity)
     '''
         This will be functions for error handling
     '''
