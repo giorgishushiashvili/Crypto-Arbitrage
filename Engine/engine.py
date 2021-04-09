@@ -101,6 +101,15 @@ class Market:
         elif types=="MARKET":
             self.client.futures_create_order(symbol=ticker,side=side,type=types,quantity=quantity)
     
+    #Gets balance of my futures asset
+    def Futures_Balance(self,ticker="USDT"):
+        dt = self.client.futures_account_balance()
+        balance = 0
+        for data in dt:
+            if data['asset'] == ticker:
+                print(data)
+                balance = data['withdrawAvailable']
+        return float(balance)
     '''
         This will be functions for error handling and Alert system
     '''

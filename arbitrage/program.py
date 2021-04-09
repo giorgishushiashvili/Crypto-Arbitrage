@@ -9,7 +9,8 @@ app = engine.Market()
 
 #TODO Here will be my arbitrage trading bot
 #ETHUSDT_210625
-def program():    
+def program():
+    
     position =pd.read_csv("logs/position.csv").tail(1)['Position'].values[0]
     #if position == B than check if I should buy
     if position == "B":
@@ -85,6 +86,10 @@ def program():
                     amount,
                     ActiveTrades.tail(1)['amount2'].values[0]
                 ])
+                
             #TODO add transfer funds ability to the program
-            #app.TransferFunds(amount=amount,types=2)
+            balance = app.Futures_Balance()
+            app.TransferFunds(amount=balance,types=2)
             app.EmailMe(title="Sold Asset",Msg="Asset Was Sold")
+    
+    
