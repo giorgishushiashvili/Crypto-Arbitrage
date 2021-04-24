@@ -1,4 +1,4 @@
-import arbitrage.program as program
+import program.program as program
 import time
 #TODO from here program will begin
 while 1:

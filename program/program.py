@@ -8,9 +8,12 @@ import time
 app = engine.Market()
 
 #TODO Here will be my arbitrage trading bot
+#TODO Needs to be reworked to fit two Cryptos
+#TODO rework math that calculates profit
+#TODO Make methods smaller
 #ETHUSDT_210625
+#this is old formula. Need to completly rewrite it.
 def program():
-    
     position =pd.read_csv("logs/position.csv").tail(1)['Position'].values[0]
     #if position == B than check if I should buy
     if position == "B":
