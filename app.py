@@ -1,6 +1,15 @@
+import Engine.engine as engine
 import program.program as program
+import pandas as pd
+import settings
 import time
-#TODO from here program will begin
-while 1:
-    program.program()
-    time.sleep(5)
+
+    
+#This is entry point for the program
+def main():
+    app = engine.Market()
+    for cr in settings.cryptos:
+        program.program(app,cr,settings.futures[cr])
+
+if __name__=="__main__":
+    main()

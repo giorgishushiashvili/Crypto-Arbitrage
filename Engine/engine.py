@@ -117,7 +117,7 @@ class Market:
     def additlog (self,file_name, list_of_elem):
         from csv import writer
         # Open file in append mode
-        with open("logs/"+file_name, 'a+', newline='') as write_obj:
+        with open("logs/"+file_name+".csv", 'a+', newline='') as write_obj:
             # Create a writer object from csv module
             csv_writer = writer(write_obj)
             # Add contents of list as last row in the csv file
@@ -153,3 +153,6 @@ class Market:
             server.sendmail(
                 sender_email, receiver_email, message.as_string()
             )
+    #Get percent of real numbers
+    def Pct(self,amount):
+        return amount/100
