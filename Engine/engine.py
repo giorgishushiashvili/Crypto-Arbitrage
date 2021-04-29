@@ -44,15 +44,16 @@ class Market:
         return dt
     #Placing Market orders on spot market 
     def Order(self,ticker,quantity,BUY=True):
+        print(BUY)
         if BUY:
             self.client.order_market_buy(
                 symbol=ticker,
-                quantity=quantity
+                quantity=round(quantity-0.0000005,6)
             )
         else:
             self.client.order_market_sell(
                 symbol=ticker,
-                quantity=quantity
+                quantity=round(quantity-0.0000005,6)
             )
     #get Account Balance for spot market
     def GetAccountBalance(self,ticker="USDT"):
@@ -107,9 +108,11 @@ class Market:
         balance = 0
         for data in dt:
             if data['asset'] == ticker:
-                print(data)
                 balance = data['withdrawAvailable']
         return float(balance)
+    
+    def Futures_TradeList(self,ticker):
+        return self.client.futures_account_trades(ticker=ticker)
     '''
         This will be functions for error handling and Alert system
     '''
