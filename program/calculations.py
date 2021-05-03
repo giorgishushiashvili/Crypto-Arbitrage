@@ -69,14 +69,19 @@ def STDEV(app,ticker,futureTk):
 def ExitTrade(app,ticker,FuturesTicker):
     try:
         #variables
+        
         ActiveTrades = pd.read_csv('logs/trades.csv')
         price1 = ActiveTrades.tail(1)['Crypto'].values[0]
         price2 = ActiveTrades.tail(1)['Crypto_210625'].values[0]
         CurrentPrice = float(app.MarketDepth(ticker)[1][0][0])
         CurrentPrice_Futures = float(app.futures_MarketDepth(FuturesTicker)[0][0][0])
+        AMOUNT1 = ActiveTrades.tail(1)['amount1'].values[0]
+        AMOUNT2 = ActiveTrades.tail(1)['amount2'].values[0]
+
+        #AMOUNT and Commisions
+        profit1 = (AMOUNT1 * CurrentPrice - AMOUNT1 * price1) - (AMOUNT1 * CurrentPrice * app.Pct(0.1) + AMOUNT1 * price1 * app.Pct(0.1))
+        profit2 = (AMOUNT2 * price2 - AMOUNT2 * CurrentPrice_Futures) - (AMOUNT2 * CurrentPrice_Futures * app.Pct(0.1) + AMOUNT2 * price2 * app.Pct(0.1))
         #P&L of both positions
-        profit1 = 100 / price1 * (1 - app.Pct(0.1)) * CurrentPrice * (1 - app.Pct(0.1)) - 100
-        profit2 = 100 - 100 / price2 * (1 - app.Pct(0.1)) * CurrentPrice_Futures * (1 - app.Pct(0.1))
         print(" profit 1 ",round(profit1,4)," profit 2 ",round(profit2,4)," Sum ",round(profit1 + profit2,4))
         if profit1 + profit2 + 200 > 200 * (1 + app.Pct(settings.TAKEPROFIT)):
             return True

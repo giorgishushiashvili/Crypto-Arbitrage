@@ -1,0 +1,1 @@
+ExitTrade,"HTTPSConnectionPool(host='api.binance.com', port=443): Read timed out. (read timeout=10)"
