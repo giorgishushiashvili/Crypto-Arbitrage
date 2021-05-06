@@ -113,6 +113,14 @@ class Market:
     
     def Futures_TradeList(self,ticker):
         return self.client.futures_account_trades(ticker=ticker)
+    
+    def Futures_currentPosition(self,ticker="BTCUSDT"):
+        data = pd.DataFrame(self.client.futures_position_information())
+        dt = 0
+        for index, row in data.iterrows():
+            if row['symbol'] == ticker:
+                dt = row
+        return dt
     '''
         This will be functions for error handling and Alert system
     '''

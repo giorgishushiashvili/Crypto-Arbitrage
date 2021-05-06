@@ -9,9 +9,10 @@ class interface:
     def FutureBalance(self,ticker):
         return self.app.Futures_Balance(ticker=ticker)
     def FuturePositions(self,ticker):
-        data = self.app.Futures_TradeList(ticker)
-        data = data[len(data)-1]
+        data = self.app.Futures_currentPosition(ticker)
         return data
+        
+        
     def display(self):
         print(
                 "-------------Spot Balance-------------\n",
