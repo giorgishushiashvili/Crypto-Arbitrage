@@ -13,10 +13,13 @@ def main():
     app = engine.Market()
     while 1:
         try:
+            t1 = time.time_ns()
             Interface.interface(app).display()
             for cr in settings.cryptos:
                 program.program(app,cr,settings.futures[cr])
-            time.sleep(5)
+            t2 = time.time_ns()
+            print((t2 - t1)/1000000)
+            time.sleep(2)
         except Exception as e:
             Exemptions.handlingProcess(e)
             time.sleep(1)

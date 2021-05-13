@@ -31,4 +31,6 @@ class interface:
                 "\n",
                 "\n-------------TRADES------------- \n",
                 self.FuturePositions("BTCUSDT_210625"),
+                "\n",
+                self.FuturePositions("ETHUSDT_210625"),
         )

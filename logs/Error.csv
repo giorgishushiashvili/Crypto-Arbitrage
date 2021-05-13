@@ -14,3 +14,5 @@ ExitTrade,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed ou
 ExitTrade,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10)"
 ExitTrade,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10)"
 ExitTrade,"('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))"
+OpenPosition,APIError(code=-1013): Filter failure: LOT_SIZE
+OpenPosition,APIError(code=-1013): Filter failure: LOT_SIZE

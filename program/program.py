@@ -41,6 +41,7 @@ def ClosePosition(app,ticker,FuturesTicker):
             amount = app.GetAccountBalance(ticker="ETH")
         elif ticker == "BTCUSDT":
             amount = app.GetAccountBalance(ticker="BTC")
+        app.EmailMe("EndTrading","Ended Trading on pair "+str(ticker)+"\n"+" Amount "+str(amount))
         app.Order(
             ticker=ticker,
             quantity=amount,
@@ -67,7 +68,7 @@ def StartTrading(app,ticker,FuturesTicker):
         app.TransferFunds(amount=amount,types=1) # Transfer half amount in the futures account
         OpenPosition(app, ticker, FuturesTicker, amount) # Open Position
         app.additlog('position',["O"])
-        app.EmailMe("Trading","Started Trading on pair"+str(ticker))
+        app.EmailMe("Trading","Started Trading on pair "+str(ticker)+"\n"+" amount = "+str(amount))
     else:
         print("Waiting")
 
@@ -79,7 +80,7 @@ def EndTrading(app,ticker,FuturesTicker):
         balance = app.Futures_Balance()
         app.TransferFunds(amount=balance,types=2)
         app.additlog('position',["C"])
-        app.EmailMe("EndTrading","Ended Trading on pair"+str(ticker))
+        app.EmailMe("EndTrading","Ended Trading on pair "+str(ticker))
     else:
         print("Waiting")
 
