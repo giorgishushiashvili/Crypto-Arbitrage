@@ -17,15 +17,16 @@ def OpenPosition(app, ticker, FuturesTicker, amount):
     try:
         tickerP = float(app.MarketDepth(ticker)[0][0][0])
         FuturesP = float(app.futures_MarketDepth(FuturesTicker)[1][0][0])
+        AMOUNT = round(amount/FuturesP-0.0005,3)
         app.Order(
             ticker,
-            round(amount/tickerP-0.0005,3)
+            AMOUNT
         )
         app.futures_order(
             FuturesTicker,
             "SELL",
             "MARKET",
-            round(amount/FuturesP-0.0005,3)
+            AMOUNT
         )
         app.additlog('trades',[ticker,tickerP,FuturesP,round(amount/tickerP-0.0005,3),round(amount/FuturesP-0.0005,3)])
     except Exception as e:
@@ -38,10 +39,9 @@ def ClosePosition(app,ticker,FuturesTicker):
         amount = 0
         #TODO make better flow control
         if ticker == "ETHUSDT":
-            amount = app.GetAccountBalance(ticker="ETH")
+            amount = round(app.GetAccountBalance(ticker="ETH")-0.000005,5)
         elif ticker == "BTCUSDT":
-            amount = app.GetAccountBalance(ticker="BTC")
-        app.EmailMe("EndTrading","Ended Trading on pair "+str(ticker)+"\n"+" Amount "+str(amount))
+            amount = round(app.GetAccountBalance(ticker="BTC")-0.0000005,6)
         app.Order(
             ticker=ticker,
             quantity=amount,
@@ -74,7 +74,7 @@ def StartTrading(app,ticker,FuturesTicker):
 
 def EndTrading(app,ticker,FuturesTicker):
     #variables
-    exitTrade = calcs.ExitTrade(app,ticker,FuturesTicker)
+    exitTrade = True#calcs.ExitTrade(app,ticker,FuturesTicker)
     if exitTrade:
         ClosePosition(app,ticker,FuturesTicker)
         balance = app.Futures_Balance()

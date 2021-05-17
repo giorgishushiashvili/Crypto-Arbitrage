@@ -44,16 +44,15 @@ class Market:
         return dt
     #Placing Market orders on spot market 
     def Order(self,ticker,quantity,BUY=True):
-        print(BUY)
         if BUY:
             self.client.order_market_buy(
                 symbol=ticker,
-                quantity=round(quantity-0.0000005,6)
+                quantity=quantity
             )
         else:
             self.client.order_market_sell(
                 symbol=ticker,
-                quantity=round(quantity-0.0000005,6)
+                quantity=quantity
             )
     #get Account Balance for spot market
     def GetAccountBalance(self,ticker="USDT"):
