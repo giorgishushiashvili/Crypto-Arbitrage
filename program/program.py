@@ -74,7 +74,7 @@ def StartTrading(app,ticker,FuturesTicker):
 
 def EndTrading(app,ticker,FuturesTicker):
     #variables
-    exitTrade = True#calcs.ExitTrade(app,ticker,FuturesTicker)
+    exitTrade = calcs.ExitTrade(app,ticker,FuturesTicker)
     if exitTrade:
         ClosePosition(app,ticker,FuturesTicker)
         balance = app.Futures_Balance()
