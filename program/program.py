@@ -28,7 +28,7 @@ def OpenPosition(app, ticker, FuturesTicker, amount):
             "MARKET",
             AMOUNT
         )
-        app.additlog('trades',[ticker,tickerP,FuturesP,round(amount/tickerP-0.0005,3),round(amount/FuturesP-0.0005,3)])
+        app.additlog('trades',[ticker,tickerP,FuturesP,AMOUNT,AMOUNT])
     except Exception as e:
         print(e)
         app.additlog("Error",["OpenPosition",e])
@@ -69,8 +69,6 @@ def StartTrading(app,ticker,FuturesTicker):
         OpenPosition(app, ticker, FuturesTicker, amount) # Open Position
         app.additlog('position',["O"])
         app.EmailMe("Trading","Started Trading on pair "+str(ticker)+"\n"+" amount = "+str(amount))
-    else:
-        print("Waiting")
 
 def EndTrading(app,ticker,FuturesTicker):
     #variables
@@ -81,8 +79,6 @@ def EndTrading(app,ticker,FuturesTicker):
         app.TransferFunds(amount=balance,types=2)
         app.additlog('position',["C"])
         app.EmailMe("EndTrading","Ended Trading on pair "+str(ticker))
-    else:
-        print("Waiting")
 
 
 
@@ -90,6 +86,7 @@ def program(app,ticker,FuturesTicker):
     position = pd.read_csv("logs/position.csv").tail(1)['Position'].values[0]
     if position == "C":
         StartTrading(app,ticker,FuturesTicker)
+        time.sleep(1)
     else:
         if ticker == pd.read_csv("logs/trades.csv").tail(1)['Ticker'].values[0]:
             print("Trading")
