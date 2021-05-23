@@ -85,7 +85,10 @@ def EndTrading(app,ticker,FuturesTicker):
 def program(app,ticker,FuturesTicker):
     position = pd.read_csv("logs/position.csv").tail(1)['Position'].values[0]
     if position == "C":
+        t1 = time.time_ns()
         StartTrading(app,ticker,FuturesTicker)
+        t2 = time.time_ns()
+        print((t2 - t1)/1000000)
         time.sleep(1)
     else:
         if ticker == pd.read_csv("logs/trades.csv").tail(1)['Ticker'].values[0]:
