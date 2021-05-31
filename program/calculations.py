@@ -14,7 +14,7 @@ def ShouldTrade(app,ticker,FuturesTicker):
         CurrentPrice = float(app.MarketDepth(ticker)[1][0][0])
         CurrentPrice_Futures = float(app.futures_MarketDepth(FuturesTicker)[0][0][0])
         print("CurrentPrice ",CurrentPrice," future Price ", CurrentPrice_Futures)
-        if CurrentPrice * 1.01 < CurrentPrice_Futures:
+        if CurrentPrice * 1.015 < CurrentPrice_Futures:
             return True
         else:
             return False
