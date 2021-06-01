@@ -80,7 +80,7 @@ def ExitTrade(app,ticker,FuturesTicker):
 
         #AMOUNT and Commisions
         profit1 = (AMOUNT1 * CurrentPrice - AMOUNT1 * price1) - (AMOUNT1 * CurrentPrice * app.Pct(0.1) + AMOUNT1 * price1 * app.Pct(0.1))
-        profit2 = (AMOUNT2 * price2 - AMOUNT2 * CurrentPrice_Futures) - (AMOUNT2 * CurrentPrice_Futures * app.Pct(0.1) + AMOUNT2 * price2 * app.Pct(0.1))
+        profit2 = (AMOUNT2 * price2 - AMOUNT2 * CurrentPrice_Futures) - (AMOUNT2 * CurrentPrice_Futures * app.Pct(0.04) + AMOUNT2 * price2 * app.Pct(0.04))
         #P&L of both positions
         MinProfit = round((price1 * AMOUNT1 + price2 * AMOUNT2)* (app.Pct(settings.TAKEPROFIT)),4)
         print(CurrentPrice," ",CurrentPrice_Futures)
