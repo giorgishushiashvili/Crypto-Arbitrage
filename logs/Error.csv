@@ -139,3 +139,5 @@ ShouldTrade,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed 
 ShouldTrade,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10)"
 ShouldTrade,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10)"
 STDEV,"('Connection aborted.', ConnectionResetError(10054, 'An existing connection was forcibly closed by the remote host', None, 10054, None))"
+STDEV,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10)"
+STDEV,"HTTPSConnectionPool(host='fapi.binance.com', port=443): Read timed out. (read timeout=10)"
