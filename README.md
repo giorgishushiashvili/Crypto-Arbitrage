@@ -5,7 +5,7 @@ This project takes advantage from difference in futures and spot price of the Bi
 # Installation
 
 After downloading the project add API.py to the top directory. Copy and fill following code:
-'''python
+```python
 #Binance Api
 API="" #BINANCE API
 SECRET="" #Binance secret
@@ -13,7 +13,7 @@ SECRET="" #Binance secret
 SENDER_EMAIL="" #Developer Gmail Email address
 RECEIVER_EMAIL="" # Email where you want to receive information
 PASSWORD_EMAIL="" # Developer Gmail password
-'''
+```
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
