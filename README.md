@@ -16,4 +16,4 @@ PASSWORD_EMAIL="" # Developer Gmail password
 ```
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+Licensed under the [MIT License](LICENSE).
